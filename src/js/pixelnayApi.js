@@ -12,27 +12,30 @@ export default class PixelBayApiService {
   }
 
   async getArticles() {
-    const options = {
-      params: {
-        key: KEY,
-        q: this.searchQuery,
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: true,
-        per_page: this.per_page,
-        page: this.page
-      }
-    }
     try {
+      const options = {
+        params: {
+          key: KEY,
+          q: this.searchQuery,
+          image_type: 'photo',
+          orientation: 'horizontal',
+          safesearch: true,
+          per_page: this.per_page,
+          page: this.page
+        }
+      }
+
       const res = await axios.get(BASE_URL, options)
       this.incrementPage()
       return res.data
+
 
     } catch (err) {
       this.resetPage()
     }
 
   }
+
 
   get query() {
     return this.searchQuery
@@ -47,6 +50,8 @@ export default class PixelBayApiService {
   }
 
   incrementPage() {
-    this.page += 1;
+    this.page++;
   }
+
+
 }
